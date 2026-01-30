@@ -11,24 +11,25 @@ function App() {
 
   function getData() {
 
-    // Chiammata lista Attrici
+    // Chiamata lista Attrici
     axios.get(actressApi).then((res) => {
       console.log("Lista Attrici", res.data);
-       setActresses(res.data);
+      setActresses(res.data);
 
     }).catch(error => {
       console.log("C'è un problema", error.message);
     })
 
-      //Chiamata lista Attori
-      axios.get(actorApi).then((res) => {
-        console.log("Lista Attori", res.data);
-        setActors(res.data);
+    //Chiamata lista Attori
+    axios.get(actorApi).then((res) => {
+      console.log("Lista Attori", res.data);
+      setActors(res.data);
 
-      }).catch(error => {
-        console.log("C'è un problema", error.message);
-      })
-    };
+    }).catch(error => {
+      console.log("C'è un problema", error.message);
+    })
+  };
+
 
   function getActorList() {
     const listActors = [...actresses, ...actors];
@@ -36,11 +37,20 @@ function App() {
   };
 
   function getAward(premio) {
-    if(Array.isArray(premio)) {
+    if (Array.isArray(premio)) {
       return premio.join(", ")
-    } else (premio === "string")
+    } else (typeof premio === "string")
     return premio;
+  };
+
+  function showActorsList() {
+    setFullActorList([...actors]);
   }
+
+  function showActressesList() {
+    setFullActorList([...actresses]);
+  }
+
 
   useEffect(getData, []);
 
@@ -49,7 +59,11 @@ function App() {
 
   return (
     <>
-      <h1>Lista Attrici/Attori</h1>
+      <h1>{fullActorList === actresses ? "Lista Attrici" : "Lista Attori"}</h1>
+      
+      <button onClick={showActressesList}>Mostra lista attrici</button>
+      <button onClick={showActorsList}>Mostra lista attori</button>
+
 
       <div className='flex-container flex-wrap gap'>
         {fullActorList.map((person, i) =>
@@ -62,11 +76,11 @@ function App() {
             <p>{person.nationality} {person.birth_year}</p>
             <p>Biografia: {person.biography}</p>
             <p>Premi: {getAward(person.awards)}</p>
-            <span>Film più famosi:
+            {/* <span>Film più famosi:
               <ul className='movieList'>
                 {person.most_famous_movies.map(movie => <li>{movie}</li>)}
               </ul>
-            </span>
+            </span> */}
 
           </div>
         )}

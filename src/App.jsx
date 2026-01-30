@@ -6,22 +6,27 @@ const actressApi = "https://lanciweb.github.io/demo/api/actresses/";
 
 function App() {
   const [actresses, setActresses] = useState([]);
+  const [actors, setActors] = useState([]);
 
   function getData() {
     axios.get(actressApi).then((res) => {
       console.log("Dati ricevuti da API", res.data);
       setActresses(res.data);
 
-
+    }).catch(error => {
+      console.log("C'è un problema", error.message);
     })
+    
   };
+
+
 
   useEffect(getData, []);
 
 
   return (
     <>
-      <h1>Hello React-API</h1>
+      <h1>Lista Attrici</h1>
 
       <div className='flex-container flex-wrap gap'>
         {actresses.map((actress, i) =>

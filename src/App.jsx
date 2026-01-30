@@ -27,11 +27,17 @@ function App() {
         {actresses.map((actress, i) =>
 
           <div className="card" key={i}>
-           <h2> {actress.name}</h2>
-            <img className="image"src={actress.image} alt="" />
+            <h2> {actress.name}</h2>
+            <img className="image" src={actress.image} alt="" />
             <p>{actress.nationality} {actress.birth_year}</p>
             <p>Biografia: {actress.biography}</p>
             <p>Premi: {actress.awards}</p>
+            <p>Film più famosi:
+              <ul className='movieList'>
+                {actress.most_famous_movies.map(movie => <li>{movie}</li>)}
+              </ul>
+            </p>
+
           </div>
         )}
 

@@ -7,4 +7,31 @@
 body {
     background-color: #222;
     color: white;
+    font-family: sans-serif;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.gap {
+    gap: 1rem;
+}
+
+.card {
+    width: calc((100% - 2rem) / 3);
+    background-color: #333;
+    padding: 1rem;
+}
+
+.card .image {
+    width: 100%;
+}
+
+.card p {
+    padding: 0.5rem;
 }
